@@ -24,6 +24,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.xpto.sales_score_api.dto.SalespersonDTO;
+import com.xpto.sales_score_api.exception.SalespersonNotFoundException;
+import com.xpto.sales_score_api.mapper.SalespersonMapper;
 import com.xpto.sales_score_api.model.Salesperson;
 import com.xpto.sales_score_api.repo.SalespersonRepository;
 import com.xpto.sales_score_api.service.SalespersonService;
@@ -49,8 +51,11 @@ public class SalespersonController {
     }
 
     @GetMapping("/{id}")
-    public Salesperson getSalesperson(@PathVariable Long id) {
-        return salespersonRepository.findById(id).orElseThrow(RuntimeException::new);
+    public SalespersonDTO getSalesperson(@PathVariable Long id) {
+        Salesperson salesperson = salespersonRepository.findById(id)
+                .orElseThrow(() -> new SalespersonNotFoundException(id));
+
+        return SalespersonMapper.toDTO(salesperson);
     }
 
     @PostMapping
@@ -58,7 +63,8 @@ public class SalespersonController {
             throws URISyntaxException {
         try {
             Salesperson savedSalesperson = salespersonService.createSalesperson(salesperson);
-            return ResponseEntity.created(new URI("/api/salespersons/" + savedSalesperson.getId())).body(savedSalesperson);
+            return ResponseEntity.created(new URI("/api/salespersons/" + savedSalesperson.getId()))
+                    .body(savedSalesperson);
         } catch (IllegalArgumentException ex) {
             return ResponseEntity.badRequest().body(Map.of("error", ex.getMessage()));
         }

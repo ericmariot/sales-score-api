@@ -23,11 +23,24 @@ public class SalespersonService implements SalespersonServiceInterface {
     }
 
     public Salesperson createSalesperson(Salesperson salesperson) {
-        if (salespersonRepository.existsByRegistration(salesperson.getRegistration())) {
-            throw new IllegalArgumentException("registration already in use");
-        }
-
+        checkRegistration(salesperson);
         return salespersonRepository.save(salesperson);
+    }
+
+    public Salesperson updateSalesperson(Salesperson salesperson) {
+        checkRegistration(salesperson);
+        
+        return salespersonRepository.save(salesperson);
+    }
+
+    public void checkRegistration(Salesperson salesperson) {
+        salespersonRepository.findByRegistration(salesperson.getRegistration())
+        .ifPresent(existingSalesperson -> {
+            if (existingSalesperson.getId() != salesperson.getId()) {
+                throw new IllegalArgumentException("registration already in use by another salesperson");
+            }
+        });
+
     }
 
     @Override

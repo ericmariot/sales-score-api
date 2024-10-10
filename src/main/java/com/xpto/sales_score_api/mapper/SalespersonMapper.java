@@ -11,5 +11,12 @@ public class SalespersonMapper {
         dto.setRegistration(salesperson.getRegistration());
         return dto;
     }
+
+    public static Salesperson toEntity(SalespersonDTO dto) {
+        Salesperson salesperson = new Salesperson();
+        salesperson.setName(dto.getName());
+        salesperson.setRegistration(dto.getRegistration());
+        return salesperson;
+    }
 }
 

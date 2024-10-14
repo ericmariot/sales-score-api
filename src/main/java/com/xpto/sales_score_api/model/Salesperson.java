@@ -7,7 +7,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -22,11 +22,11 @@ public class Salesperson {
     @Column(name = "id", nullable = false, unique = true)
     private long id;
 
-    @NotBlank(message = "name is mandatory")
+    @NotNull(message = "name can not be blank")
     @Column(name = "name", nullable = false)
     private String name;
 
-    @NotBlank(message = "registration is mandatory")
+    @NotNull(message = "registration can not be blank")
     @Column(name = "registration", nullable = false, unique = true)
     private String registration;
 }

@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.xpto.sales_score_api.dto.SalespersonDTO;
-import com.xpto.sales_score_api.exception.SalespersonNotFoundException;
+import com.xpto.sales_score_api.exception.NotFoundException;
 import com.xpto.sales_score_api.mapper.SalespersonMapper;
 import com.xpto.sales_score_api.model.Salesperson;
 import com.xpto.sales_score_api.repo.SalespersonRepository;
@@ -53,13 +53,13 @@ public class SalespersonController {
     @GetMapping("/{id}")
     public SalespersonDTO getSalesperson(@PathVariable Long id) {
         Salesperson salesperson = salespersonRepository.findById(id)
-                .orElseThrow(() -> new SalespersonNotFoundException(id));
+                .orElseThrow(() -> new NotFoundException("salesperson", id));
 
         return SalespersonMapper.toDTO(salesperson);
     }
 
-    @PostMapping()
-    public ResponseEntity<Object> createClient(@Valid @RequestBody SalespersonDTO salespersonDTO)
+    @PostMapping
+    public ResponseEntity<Object> postSalesperson(@Valid @RequestBody SalespersonDTO salespersonDTO)
             throws URISyntaxException {
         try {
             Salesperson salesperson = SalespersonMapper.toEntity(salespersonDTO);
@@ -74,10 +74,11 @@ public class SalespersonController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateClient(@PathVariable Long id, @RequestBody SalespersonDTO salespersonDTO) {
+    public ResponseEntity<Object> putSalesperson(@PathVariable Long id,
+            @Valid @RequestBody SalespersonDTO salespersonDTO) {
         try {
             Salesperson currentSalesperson = salespersonRepository.findById(id)
-                    .orElseThrow(() -> new SalespersonNotFoundException(id));
+                    .orElseThrow(() -> new NotFoundException("salesperson", id));
             currentSalesperson.setName(salespersonDTO.getName());
             currentSalesperson.setRegistration(salespersonDTO.getRegistration());
 
@@ -92,7 +93,7 @@ public class SalespersonController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<SalespersonDTO> deleteSalesperson(@PathVariable Long id) {
-        salespersonRepository.findById(id).orElseThrow(() -> new SalespersonNotFoundException(id));
+        salespersonRepository.findById(id).orElseThrow(() -> new NotFoundException("salesperson", id));
         salespersonRepository.deleteById(id);
         return ResponseEntity.ok().build();
     }

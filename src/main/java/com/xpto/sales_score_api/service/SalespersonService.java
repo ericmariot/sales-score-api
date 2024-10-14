@@ -2,6 +2,7 @@ package com.xpto.sales_score_api.service;
 
 import java.util.List;
 
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
@@ -23,24 +24,19 @@ public class SalespersonService implements SalespersonServiceInterface {
     }
 
     public Salesperson createSalesperson(Salesperson salesperson) {
-        checkRegistration(salesperson);
-        return salespersonRepository.save(salesperson);
+        try {
+            return salespersonRepository.save(salesperson);
+        } catch (DataIntegrityViolationException e) {
+            throw new IllegalArgumentException("registration already in use by another salesperson");
+        }
     }
 
     public Salesperson updateSalesperson(Salesperson salesperson) {
-        checkRegistration(salesperson);
-        
-        return salespersonRepository.save(salesperson);
-    }
-
-    public void checkRegistration(Salesperson salesperson) {
-        salespersonRepository.findByRegistration(salesperson.getRegistration())
-        .ifPresent(existingSalesperson -> {
-            if (existingSalesperson.getId() != salesperson.getId()) {
-                throw new IllegalArgumentException("registration already in use by another salesperson");
-            }
-        });
-
+        try {
+            return salespersonRepository.save(salesperson);
+        } catch (DataIntegrityViolationException e) {
+            throw new IllegalArgumentException("registration already in use by another salesperson");
+        }
     }
 
     @Override

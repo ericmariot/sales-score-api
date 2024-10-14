@@ -1,6 +1,6 @@
 package com.xpto.sales_score_api.dto;
 
-import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -10,9 +10,9 @@ public class SalespersonDTO {
 
     private long id;
 
-    @NotBlank(message = "name is mandatory")
+    @NotNull(message = "name can not be blank")
     private String name;
 
-    @NotBlank(message = "registration is mandatory")
+    @NotNull(message = "registration can not be blank")
     private String registration;
 }

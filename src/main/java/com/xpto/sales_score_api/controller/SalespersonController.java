@@ -78,6 +78,7 @@ public class SalespersonController {
             if (salespersonUpdateDTO.getName() != null) {
                 currentSalesperson.setName(salespersonUpdateDTO.getName());
             }
+            
             if (salespersonUpdateDTO.getRegistration() != null) {
                 currentSalesperson.setRegistration(salespersonUpdateDTO.getRegistration());
             }

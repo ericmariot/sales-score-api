@@ -2,17 +2,12 @@ package com.xpto.sales_score_api.controller;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.FieldError;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,10 +15,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.xpto.sales_score_api.dto.SalespersonDTO;
+import com.xpto.sales_score_api.dto.salesperson.SalespersonDTO;
+import com.xpto.sales_score_api.dto.salesperson.SalespersonUpdateDTO;
 import com.xpto.sales_score_api.exception.NotFoundException;
 import com.xpto.sales_score_api.mapper.SalespersonMapper;
 import com.xpto.sales_score_api.model.Salesperson;
@@ -75,12 +70,17 @@ public class SalespersonController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> putSalesperson(@PathVariable Long id,
-            @Valid @RequestBody SalespersonDTO salespersonDTO) {
+            @Valid @RequestBody SalespersonUpdateDTO salespersonUpdateDTO) {
         try {
             Salesperson currentSalesperson = salespersonRepository.findById(id)
                     .orElseThrow(() -> new NotFoundException("salesperson", id));
-            currentSalesperson.setName(salespersonDTO.getName());
-            currentSalesperson.setRegistration(salespersonDTO.getRegistration());
+
+            if (salespersonUpdateDTO.getName() != null) {
+                currentSalesperson.setName(salespersonUpdateDTO.getName());
+            }
+            if (salespersonUpdateDTO.getRegistration() != null) {
+                currentSalesperson.setRegistration(salespersonUpdateDTO.getRegistration());
+            }
 
             Salesperson updatedSalesperson = salespersonService.updateSalesperson(currentSalesperson);
             SalespersonDTO updatedSalespersonDTO = SalespersonMapper.toDTO(updatedSalesperson);
@@ -93,21 +93,7 @@ public class SalespersonController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<SalespersonDTO> deleteSalesperson(@PathVariable Long id) {
-        salespersonRepository.findById(id).orElseThrow(() -> new NotFoundException("salesperson", id));
         salespersonRepository.deleteById(id);
         return ResponseEntity.ok().build();
-    }
-
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(
-            MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
-        return errors;
     }
 }

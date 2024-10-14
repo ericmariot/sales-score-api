@@ -1,4 +1,4 @@
-package com.xpto.sales_score_api.dto;
+package com.xpto.sales_score_api.dto.salesperson;
 
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;

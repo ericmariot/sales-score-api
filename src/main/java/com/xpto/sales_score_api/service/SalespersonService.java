@@ -6,7 +6,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
-import com.xpto.sales_score_api.dto.SalespersonDTO;
+import com.xpto.sales_score_api.dto.salesperson.SalespersonDTO;
 import com.xpto.sales_score_api.mapper.SalespersonMapper;
 import com.xpto.sales_score_api.model.Salesperson;
 import com.xpto.sales_score_api.repo.SalespersonRepository;

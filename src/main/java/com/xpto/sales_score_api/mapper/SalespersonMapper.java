@@ -1,6 +1,6 @@
 package com.xpto.sales_score_api.mapper;
 
-import com.xpto.sales_score_api.dto.SalespersonDTO;
+import com.xpto.sales_score_api.dto.salesperson.SalespersonDTO;
 import com.xpto.sales_score_api.model.Salesperson;
 
 public class SalespersonMapper {

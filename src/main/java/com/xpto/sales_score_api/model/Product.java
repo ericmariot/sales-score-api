@@ -24,11 +24,11 @@ public class Product {
     @Column(name = "id", nullable = false, unique = true)
     private long id;
 
-    @NotNull(message = "name can not be blank")
+    @NotNull(message = "name cannot be blank")
     @Column(name = "name", nullable = false)
     private String name;
 
-    @NotNull(message = "price can not be blank")
+    @NotNull(message = "price cannot be blank")
     @DecimalMin(value = "0.0", message = "price must be greater than 0")
     @Column(name = "price", nullable = false, precision = 10, scale = 2)
     private BigDecimal price;

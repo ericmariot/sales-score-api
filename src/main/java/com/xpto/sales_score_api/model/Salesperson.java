@@ -22,11 +22,11 @@ public class Salesperson {
     @Column(name = "id", nullable = false, unique = true)
     private long id;
 
-    @NotNull(message = "name can not be blank")
+    @NotNull(message = "name cannot be blank")
     @Column(name = "name", nullable = false)
     private String name;
 
-    @NotNull(message = "registration can not be blank")
+    @NotNull(message = "registration cannot be blank")
     @Column(name = "registration", nullable = false, unique = true)
     private String registration;
 }

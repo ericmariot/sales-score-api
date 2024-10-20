@@ -10,9 +10,9 @@ public class SalespersonDTO {
 
     private long id;
 
-    @NotNull(message = "name can not be blank")
+    @NotNull(message = "name cannot be blank")
     private String name;
 
-    @NotNull(message = "registration can not be blank")
+    @NotNull(message = "registration cannot be blank")
     private String registration;
 }

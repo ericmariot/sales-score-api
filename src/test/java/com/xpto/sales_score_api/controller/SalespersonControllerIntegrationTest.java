@@ -104,7 +104,7 @@ public class SalespersonControllerIntegrationTest {
                 .content(invalidSalesperson)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.registration").value("registration can not be blank"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.registration").value("registration cannot be blank"));
     }
 
     @Test
@@ -115,6 +115,6 @@ public class SalespersonControllerIntegrationTest {
                 .content(invalidSalesperson)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("name can not be blank"));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.name").value("name cannot be blank"));
     }
 }

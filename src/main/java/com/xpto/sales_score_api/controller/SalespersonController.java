@@ -41,7 +41,7 @@ public class SalespersonController {
     }
 
     @GetMapping
-    public List<SalespersonDTO> findAll(@RequestParam(required = false) String registration) {
+    public List<SalespersonDTO> getSalespersons(@RequestParam(required = false) String registration) {
         return salespersonService.findAll(registration);
     }
 

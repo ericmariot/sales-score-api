@@ -30,7 +30,7 @@ public class SaleController {
     private SaleService saleService;
 
     @GetMapping
-    public List<SaleDTO> findAll() {
+    public List<SaleDTO> getSales() {
         return saleRepository.findAll().stream().map(SaleMapper::toDTO).toList();
     }
 

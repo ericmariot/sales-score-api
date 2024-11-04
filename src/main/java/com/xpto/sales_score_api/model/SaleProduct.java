@@ -49,7 +49,7 @@ public class SaleProduct {
     private BigDecimal total;
 
     public void calculateTotal() {
-        if (this.price != null && this.quantity > 0) {
+        if (this.quantity > 0) {
             this.total = this.price.multiply(BigDecimal.valueOf(this.quantity));
         } else {
             this.total = BigDecimal.ZERO;

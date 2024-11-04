@@ -62,6 +62,8 @@ public class SaleService {
         sale.setTotal(saleTotal);
 
         Sale savedSale = saleRepository.save(sale);
+        long savedSaleId = savedSale.getId();
+        savedSale = saleRepository.findById(savedSaleId).orElseThrow(() -> new NotFoundException("sale", savedSaleId));
 
         return SaleMapper.toDTO(savedSale);
     }

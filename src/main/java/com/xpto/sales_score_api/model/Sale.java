@@ -41,6 +41,16 @@ public class Sale {
     @Column(name = "total", nullable = false, precision = 10, scale = 2)
     private BigDecimal total;
 
-    @Column(name = "sale_date", nullable = true)
+    @Column(name = "sale_date", nullable = true, updatable = false, insertable = false)
     private LocalDateTime saleDate;
+
+    @Override
+    public String toString() {
+        return "{" +
+                " id='" + getId() + "'" +
+                ", salespersonId='" + (salesperson != null ? salesperson.getId() : "null") + "'" +
+                ", total='" + getTotal() + "'" +
+                ", saleDate='" + getSaleDate() + "'" +
+                "}";
+    }
 }

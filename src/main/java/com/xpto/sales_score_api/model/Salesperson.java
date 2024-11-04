@@ -1,6 +1,5 @@
 package com.xpto.sales_score_api.model;
 
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

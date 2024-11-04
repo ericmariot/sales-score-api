@@ -2,7 +2,6 @@ package com.xpto.sales_score_api.dto.sale;
 
 import java.math.BigDecimal;
 
-import jakarta.persistence.Column;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;

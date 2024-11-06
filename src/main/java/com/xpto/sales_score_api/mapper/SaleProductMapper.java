@@ -19,7 +19,7 @@ public class SaleProductMapper {
         SaleProduct saleProduct = new SaleProduct();
         saleProduct.setProduct(product);
         saleProduct.setQuantity(dto.getQuantity());
-        saleProduct.setPrice(dto.getPrice());
+        saleProduct.setPrice(product.getPrice());
 
         SaleProductId saleProductId = new SaleProductId();
         saleProductId.setProductId(product.getId());

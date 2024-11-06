@@ -19,4 +19,13 @@ public class SaleProductDTO {
     @NotNull(message = "price cannot be blank")
     @DecimalMin(value = "0.0", message = "price must be greater than 0")
     private BigDecimal price;
+
+    @Override
+    public String toString() {
+        return "{" +
+                " productId='" + getProductId() + "'" +
+                ", quantity='" + getQuantity() + "'" +
+                ", price='" + getPrice() + "'" +
+                "}";
+    }
 }

@@ -43,16 +43,16 @@ public class SaleService {
 
         Sale sale = SaleMapper.toEntity(saleDTO, salesperson, saleProducts);
 
-        for (SaleProductDTO productDTO : saleDTO.getProducts()) {
-            long productId = productDTO.getProductId();
+        for (SaleProductDTO saleProductDTO : saleDTO.getProducts()) {
+            long productId = saleProductDTO.getProductId();
 
             Product product = productRepository.findById(productId)
                     .orElseThrow(() -> new NotFoundException("product", productId));
 
-            SaleProduct saleProduct = SaleProductMapper.toEntity(productDTO, product);
+            SaleProduct saleProduct = SaleProductMapper.toEntity(saleProductDTO, product);
             saleProduct.setPrice(product.getPrice());
             saleProduct.setSale(sale);
-            
+
             saleProduct.calculateTotal();
             saleTotal = saleTotal.add(saleProduct.getTotal());
 

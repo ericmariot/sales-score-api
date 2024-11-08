@@ -55,7 +55,7 @@ public class SalespersonController {
         return SalespersonMapper.toDTO(salesperson);
     }
 
-    @GetMapping("/most-sales")
+    @GetMapping("/sales-count")
     public ResponseEntity<List<SalesCountSalespersonDTO>> getSalesCountSalesperson() {
         List<SalesCountSalespersonDTO> salesCount = salespersonService.getSalesCountSalesperson();
 

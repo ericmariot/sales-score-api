@@ -50,7 +50,7 @@ public class ProductController {
         return ProductMapper.toDTO(product);
     }
 
-    @GetMapping("/most-sold")
+    @GetMapping("/quantity-sold")
     public ResponseEntity<List<MostSoldProductDTO>> getMostSoldProducts(
             @RequestParam(defaultValue = "desc") String order) {
         List<MostSoldProductDTO> products = productService.getMostSoldProducts(order);

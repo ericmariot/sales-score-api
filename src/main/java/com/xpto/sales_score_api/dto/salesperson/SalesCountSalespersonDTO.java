@@ -11,7 +11,9 @@ import lombok.Setter;
 @AllArgsConstructor
 public class SalesCountSalespersonDTO {
 
-    private long salespersonId;
+    private int salespersonId;
+
+    private String salesperson;
 
     private long sales;
 }

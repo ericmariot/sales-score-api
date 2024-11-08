@@ -11,6 +11,10 @@ import com.xpto.sales_score_api.model.Salesperson;
 
 @Repository
 public interface SalespersonRepository extends JpaRepository<Salesperson, Long>, JpaSpecificationExecutor<Salesperson> {
-    @Query(value = "SELECT s.salesperson.id, COUNT(s) FROM Sale s GROUP BY s.salesperson.id ORDER BY COUNT(s) DESC")
+    @Query(value = "SELECT sale.salesperson_id, salesperson.name, COUNT(sale) " +
+            "FROM sale " +
+            "LEFT JOIN salesperson ON salesperson.id = sale.salesperson_id " +
+            "GROUP BY sale.salesperson_id, salesperson.name " +
+            "ORDER BY COUNT(sale) DESC", nativeQuery = true)
     List<Object[]> findSalesCountBySalesperson();
 }

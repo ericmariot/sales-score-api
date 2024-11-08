@@ -1,7 +1,7 @@
 package com.xpto.sales_score_api.service;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.jpa.domain.Specification;
@@ -43,10 +43,17 @@ public class SalespersonService implements SalespersonServiceInterface {
 
     public List<SalesCountSalespersonDTO> getSalesCountSalesperson() {
         List<Object[]> results = salespersonRepository.findSalesCountBySalesperson();
+        List<SalesCountSalespersonDTO> salesCountSalesperson = new ArrayList<>();
 
-        return results.stream()
-                .map(row -> new SalesCountSalespersonDTO((long) row[0], (long) row[1]))
-                .collect(Collectors.toList());
+        for (Object[] result : results) {
+            int salespersonId = (int) result[0];
+            String salesperson = (String) result[1];
+            long salesCount = (long) result[2];
+
+            salesCountSalesperson.add(new SalesCountSalespersonDTO(salespersonId, salesperson, salesCount));
+        }
+
+        return salesCountSalesperson;
     }
 
     @Override

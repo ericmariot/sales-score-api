@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.xpto.sales_score_api.dto.salesperson.SalesCountSalespersonDTO;
 import com.xpto.sales_score_api.dto.salesperson.SalespersonDTO;
 import com.xpto.sales_score_api.dto.salesperson.SalespersonUpdateDTO;
 import com.xpto.sales_score_api.exception.NotFoundException;
@@ -53,6 +55,13 @@ public class SalespersonController {
         return SalespersonMapper.toDTO(salesperson);
     }
 
+    @GetMapping("/most-sales")
+    public ResponseEntity<List<SalesCountSalespersonDTO>> getSalesCountSalesperson() {
+        List<SalesCountSalespersonDTO> salesCount = salespersonService.getSalesCountSalesperson();
+
+        return new ResponseEntity<>(salesCount, HttpStatus.OK);
+    }
+
     @PostMapping
     public ResponseEntity<Object> postSalesperson(@Valid @RequestBody SalespersonDTO salespersonDTO)
             throws URISyntaxException {
@@ -78,7 +87,7 @@ public class SalespersonController {
             if (salespersonUpdateDTO.getName() != null) {
                 currentSalesperson.setName(salespersonUpdateDTO.getName());
             }
-            
+
             if (salespersonUpdateDTO.getRegistration() != null) {
                 currentSalesperson.setRegistration(salespersonUpdateDTO.getRegistration());
             }

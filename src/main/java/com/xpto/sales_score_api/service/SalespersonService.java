@@ -1,11 +1,13 @@
 package com.xpto.sales_score_api.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import com.xpto.sales_score_api.dto.salesperson.SalesCountSalespersonDTO;
 import com.xpto.sales_score_api.dto.salesperson.SalespersonDTO;
 import com.xpto.sales_score_api.mapper.SalespersonMapper;
 import com.xpto.sales_score_api.model.Salesperson;
@@ -37,6 +39,14 @@ public class SalespersonService implements SalespersonServiceInterface {
         } catch (DataIntegrityViolationException e) {
             throw new IllegalArgumentException("registration already in use by another salesperson");
         }
+    }
+
+    public List<SalesCountSalespersonDTO> getSalesCountSalesperson() {
+        List<Object[]> results = salespersonRepository.findSalesCountBySalesperson();
+
+        return results.stream()
+                .map(row -> new SalesCountSalespersonDTO((long) row[0], (long) row[1]))
+                .collect(Collectors.toList());
     }
 
     @Override

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.xpto.sales_score_api.dto.salesperson.ProfitSalespersonDTO;
 import com.xpto.sales_score_api.dto.salesperson.SalesCountSalespersonDTO;
 import com.xpto.sales_score_api.dto.salesperson.SalespersonDTO;
 import com.xpto.sales_score_api.dto.salesperson.SalespersonUpdateDTO;
@@ -60,6 +61,13 @@ public class SalespersonController {
         List<SalesCountSalespersonDTO> salesCount = salespersonService.getSalesCountSalesperson();
 
         return new ResponseEntity<>(salesCount, HttpStatus.OK);
+    }
+
+    @GetMapping("/profit")
+    public ResponseEntity<List<ProfitSalespersonDTO>> getProfitSalesperson() {
+        List<ProfitSalespersonDTO> profits = salespersonService.getProfitSalesperson();
+
+        return new ResponseEntity<>(profits, HttpStatus.OK);
     }
 
     @PostMapping

@@ -4,13 +4,19 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.xpto.sales_score_api.dto.product.MostSoldProductDTO;
+import com.xpto.sales_score_api.exception.ProductInUseException;
+import com.xpto.sales_score_api.repo.ProductRepository;
 import com.xpto.sales_score_api.repo.SaleProductRepository;
 
 @Service
 public class ProductService {
+
+    @Autowired
+    private ProductRepository productRepository;
 
     @Autowired
     private SaleProductRepository saleProductRepository;
@@ -38,5 +44,13 @@ public class ProductService {
         }
 
         return soldProducts;
+    }
+
+    public void deleteProduct(Long productId) {
+        try {
+            productRepository.deleteById(productId);
+        } catch (DataIntegrityViolationException ex) {
+            throw new ProductInUseException("Cannot delete this product because it is referenced by existing sales.");
+        }
     }
 }

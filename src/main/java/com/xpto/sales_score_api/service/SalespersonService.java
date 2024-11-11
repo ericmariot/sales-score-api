@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.xpto.sales_score_api.dto.salesperson.ProfitSalespersonDTO;
 import com.xpto.sales_score_api.dto.salesperson.SalesCountSalespersonDTO;
 import com.xpto.sales_score_api.dto.salesperson.SalespersonDTO;
+import com.xpto.sales_score_api.exception.SalespersonInUseException;
 import com.xpto.sales_score_api.mapper.SalespersonMapper;
 import com.xpto.sales_score_api.model.Salesperson;
 import com.xpto.sales_score_api.repo.SalespersonRepository;
@@ -72,6 +73,15 @@ public class SalespersonService implements SalespersonServiceInterface {
         }
 
         return profitSalesperson;
+    }
+
+    public void deleteSalesperson(Long salespersonId) {
+        try {
+            salespersonRepository.deleteById(salespersonId);
+        } catch (DataIntegrityViolationException ex) {
+            throw new SalespersonInUseException(
+                    "Cannot delete this salesperson because it is referenced by existing sales");
+        }
     }
 
     @Override

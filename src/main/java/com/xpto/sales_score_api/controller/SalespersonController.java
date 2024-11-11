@@ -111,7 +111,7 @@ public class SalespersonController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<SalespersonDTO> deleteSalesperson(@PathVariable Long id) {
-        salespersonRepository.deleteById(id);
+        salespersonService.deleteSalesperson(id);
         return ResponseEntity.ok().build();
     }
 }

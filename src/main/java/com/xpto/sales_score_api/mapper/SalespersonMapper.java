@@ -19,4 +19,3 @@ public class SalespersonMapper {
         return salesperson;
     }
 }
-

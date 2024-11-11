@@ -10,6 +10,6 @@ public class SalespersonUpdateDTO {
     private long id;
 
     private String name;
-    
+
     private String registration;
 }

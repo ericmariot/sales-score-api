@@ -3,7 +3,6 @@ package com.xpto.sales_score_api.controller;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -71,42 +70,33 @@ public class SalespersonController {
     }
 
     @PostMapping
-    public ResponseEntity<Object> postSalesperson(@Valid @RequestBody SalespersonDTO salespersonDTO)
+    public ResponseEntity<SalespersonDTO> postSalesperson(@Valid @RequestBody SalespersonDTO salespersonDTO)
             throws URISyntaxException {
-        try {
-            Salesperson salesperson = SalespersonMapper.toEntity(salespersonDTO);
-            Salesperson savedSalesperson = salespersonService.createSalesperson(salesperson);
-            SalespersonDTO savedSalespersonDTO = SalespersonMapper.toDTO(savedSalesperson);
+        Salesperson salesperson = SalespersonMapper.toEntity(salespersonDTO);
+        Salesperson savedSalesperson = salespersonService.createSalesperson(salesperson);
+        SalespersonDTO savedSalespersonDTO = SalespersonMapper.toDTO(savedSalesperson);
 
-            return ResponseEntity.created(new URI("/api/salespersons/" + savedSalespersonDTO.getId()))
-                    .body(savedSalespersonDTO);
-        } catch (IllegalArgumentException ex) {
-            return ResponseEntity.badRequest().body(Map.of("error", ex.getMessage()));
-        }
+        return ResponseEntity.created(new URI("/api/salespersons/" + savedSalespersonDTO.getId()))
+                .body(savedSalespersonDTO);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Object> putSalesperson(@PathVariable Long id,
+    public ResponseEntity<SalespersonDTO> putSalesperson(@PathVariable Long id,
             @Valid @RequestBody SalespersonUpdateDTO salespersonUpdateDTO) {
-        try {
-            Salesperson currentSalesperson = salespersonRepository.findById(id)
-                    .orElseThrow(() -> new NotFoundException("salesperson", id));
+        Salesperson currentSalesperson = salespersonRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("salesperson", id));
 
-            if (salespersonUpdateDTO.getName() != null) {
-                currentSalesperson.setName(salespersonUpdateDTO.getName());
-            }
-
-            if (salespersonUpdateDTO.getRegistration() != null) {
-                currentSalesperson.setRegistration(salespersonUpdateDTO.getRegistration());
-            }
-
-            Salesperson updatedSalesperson = salespersonService.updateSalesperson(currentSalesperson);
-            SalespersonDTO updatedSalespersonDTO = SalespersonMapper.toDTO(updatedSalesperson);
-
-            return ResponseEntity.ok(updatedSalespersonDTO);
-        } catch (IllegalArgumentException ex) {
-            return ResponseEntity.badRequest().body(Map.of("error", ex.getMessage()));
+        if (salespersonUpdateDTO.getName() != null) {
+            currentSalesperson.setName(salespersonUpdateDTO.getName());
         }
+
+        if (salespersonUpdateDTO.getRegistration() != null) {
+            currentSalesperson.setRegistration(salespersonUpdateDTO.getRegistration());
+        }
+
+        Salesperson updatedSalesperson = salespersonService.updateSalesperson(currentSalesperson);
+        SalespersonDTO updatedSalespersonDTO = SalespersonMapper.toDTO(updatedSalesperson);
+        return ResponseEntity.ok(updatedSalespersonDTO);
     }
 
     @DeleteMapping("/{id}")

@@ -50,6 +50,13 @@ docker-compose up
 mvn spring-boot:run
 ```
 
+## Running tests
+
+Tests can be ran with Maven as follow:
+```bash
+mvn test
+```
+
 ## API Collection
 
 A Postman JSON Collection can be found at the root of the project with the name `sales-score-api.postman_collection.json`.

@@ -50,6 +50,8 @@ docker-compose up
 mvn spring-boot:run
 ```
 
+You can now check if the API is running at [localhost:8000/api/health](localhost:8000/api/health)
+
 ## Running tests
 
 Tests can be ran with Maven as follow:

@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "8600d178-c051-42e8-a233-54618d5c9e15",
+		"_postman_id": "1bb01afb-a20e-4d0e-8767-5b1b455e241c",
 		"name": "sales-score-api",
 		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
 		"_exporter_id": "39683504"
@@ -533,6 +533,14 @@
 					"response": []
 				}
 			]
+		},
+		{
+			"name": "health",
+			"request": {
+				"method": "GET",
+				"header": []
+			},
+			"response": []
 		}
 	],
 	"variable": [

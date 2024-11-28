@@ -1,6 +1,7 @@
 package com.xpto.sales_score_api.service;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -42,6 +43,10 @@ public class SaleService {
         BigDecimal saleTotal = BigDecimal.ZERO;
 
         Sale sale = SaleMapper.toEntity(saleDTO, salesperson, saleProducts);
+
+        if (sale.getSaleDate() == null) {
+            sale.setSaleDate(LocalDateTime.now());
+        }
 
         for (SaleProductDTO saleProductDTO : saleDTO.getProducts()) {
             long productId = saleProductDTO.getProductId();

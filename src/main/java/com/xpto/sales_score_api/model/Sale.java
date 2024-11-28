@@ -38,7 +38,7 @@ public class Sale {
     private BigDecimal total;
 
     @Column(name = "sale_date", nullable = true, updatable = false, insertable = false)
-    private LocalDateTime saleDate;
+    private LocalDateTime saleDate = LocalDateTime.now();
 
     public long getId() {
         return this.id;

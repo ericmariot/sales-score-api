@@ -21,7 +21,7 @@ public class SaleDTO {
     @DecimalMin(value = "0.0", message = "price must be greater than 0")
     private BigDecimal total;
 
-    private LocalDateTime saleDate;
+    private LocalDateTime saleDate = LocalDateTime.now();
 
     public long getId() {
         return this.id;

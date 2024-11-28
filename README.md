@@ -83,12 +83,16 @@ I would implement OAuth 2.0 protocol with JWT (JSON Web Tokens). This approach e
 
 1. Authentication
     - Using a third-party authentication and authorization system like Auth0, Keycloak and such.
+
 <br>
+
 2. Authorization
     - The backend validates the JWT included in the `Authorization` header of each API request (Bearer<token>);
     - The token is verified using the public key provided by the third-party software (Auth0);
     - Can implement role-based access control (e.g `roles`, `permissions`, `userId`).
+
 <br>
+
 3. API Flow
     - The client sends the access token as a `Bearer` token in the `Authorization` header;
     - The backend security layer verifies the token's signature and expiration;
@@ -96,7 +100,9 @@ I would implement OAuth 2.0 protocol with JWT (JSON Web Tokens). This approach e
         - Extract pertinent information such as `roles` or `permissions` from the token payload;
         - Grant or deny access;
     - If the token is invalid the API responds with `401 Unauthorized` or `403 Forbidden`.
+
 <br>
+
 4. Additional considerations
     - Token expiration and refresh;
     - API security with HTTPS and CORS;

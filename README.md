@@ -64,6 +64,6 @@ A Postman JSON Collection can be found at the root of the project with the name 
 
 ## Database Diagram
 
-https://dbdiagram.io/d/65249618ffbf5169f05ab90f
+[https://dbdiagram.io/d/65249618ffbf5169f05ab90f](diagram)
 
 ![image](https://github.com/user-attachments/assets/93e609d6-e37c-40af-a607-941f62a845f1)

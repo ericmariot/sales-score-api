@@ -50,7 +50,7 @@ docker-compose up
 mvn spring-boot:run
 ```
 
-You can now check if the API is running at [localhost:8000/api/health](localhost:8000/api/health)
+You can now check if the API is running at [localhost:8080/api/health](http://localhost:8080/api/health)
 
 ## Running tests
 

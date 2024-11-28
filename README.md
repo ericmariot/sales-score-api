@@ -59,7 +59,7 @@ mvn test
 
 ## API Collection
 
-A Postman JSON Collection can be found at the root of the project with the name `sales-score-api.postman_collection.json`.
+A Postman JSON Collection can be found at the root of the project with the name [`sales-score-api.postman_collection.json`](https://github.com/ericmariot/sales-score-api/blob/main/sales-score-api.postman_collection.json).
 
 
 ## Database Diagram

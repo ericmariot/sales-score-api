@@ -6,11 +6,7 @@ import java.util.List;
 
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.Setter;
 
-@Getter
-@Setter
 public class SaleDTO {
 
     private long id;
@@ -26,4 +22,45 @@ public class SaleDTO {
     private BigDecimal total;
 
     private LocalDateTime saleDate;
+
+    public long getId() {
+        return this.id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public long getSalespersonId() {
+        return this.salespersonId;
+    }
+
+    public void setSalespersonId(long salespersonId) {
+        this.salespersonId = salespersonId;
+    }
+
+    public List<SaleProductDTO> getProducts() {
+        return this.products;
+    }
+
+    public void setProducts(List<SaleProductDTO> products) {
+        this.products = products;
+    }
+
+    public BigDecimal getTotal() {
+        return this.total;
+    }
+
+    public void setTotal(BigDecimal total) {
+        this.total = total;
+    }
+
+    public LocalDateTime getSaleDate() {
+        return this.saleDate;
+    }
+
+    public void setSaleDate(LocalDateTime saleDate) {
+        this.saleDate = saleDate;
+    }
+
 }

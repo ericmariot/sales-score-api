@@ -7,12 +7,8 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
 @Table(name = "salesperson")
 public class Salesperson {
 
@@ -28,4 +24,29 @@ public class Salesperson {
     @NotNull(message = "registration cannot be blank")
     @Column(name = "registration", nullable = false, unique = true)
     private String registration;
+
+    public long getId() {
+        return this.id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getRegistration() {
+        return this.registration;
+    }
+
+    public void setRegistration(String registration) {
+        this.registration = registration;
+    }
+
 }

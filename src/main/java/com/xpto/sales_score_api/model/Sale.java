@@ -16,12 +16,8 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
-@Getter
-@Setter
 @Table(name = "sale")
 public class Sale {
 
@@ -43,6 +39,46 @@ public class Sale {
 
     @Column(name = "sale_date", nullable = true, updatable = false, insertable = false)
     private LocalDateTime saleDate;
+
+    public long getId() {
+        return this.id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public Salesperson getSalesperson() {
+        return this.salesperson;
+    }
+
+    public void setSalesperson(Salesperson salesperson) {
+        this.salesperson = salesperson;
+    }
+
+    public Set<SaleProduct> getSaleProducts() {
+        return this.saleProducts;
+    }
+
+    public void setSaleProducts(Set<SaleProduct> saleProducts) {
+        this.saleProducts = saleProducts;
+    }
+
+    public BigDecimal getTotal() {
+        return this.total;
+    }
+
+    public void setTotal(BigDecimal total) {
+        this.total = total;
+    }
+
+    public LocalDateTime getSaleDate() {
+        return this.saleDate;
+    }
+
+    public void setSaleDate(LocalDateTime saleDate) {
+        this.saleDate = saleDate;
+    }
 
     @Override
     public String toString() {
